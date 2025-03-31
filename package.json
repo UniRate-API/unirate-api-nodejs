@@ -1,0 +1,33 @@
+{
+  "name": "unirate-api",
+  "version": "0.1.1",
+  "description": "Official Node.js client for the Unirate API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:live": "ts-node test-script.ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "unirate",
+    "api",
+    "currency",
+    "exchange",
+    "rates"
+  ],
+  "author": "Unirate Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.28",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}
