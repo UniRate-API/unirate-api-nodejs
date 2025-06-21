@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { UnirateClient } from './src';
 
 async function runTests() {
@@ -27,21 +28,22 @@ async function runTests() {
 
     // Test 3: Convert amount
     console.log('Test 3: Converting current amount...');
-    const amount = await client.convert(100, 'USD', 'EUR');
+    const amount = await client.convert('EUR', 100, 'USD');
     console.log(`100 USD = ${amount} EUR`);
     console.log('✓ Test 3 passed\n');
 
     // Test 4: Get historical rate
     console.log('Test 4: Getting historical exchange rate...');
-    const historicalRate = await client.getHistoricalRate('USD', 'EUR', '2024-01-01');
+    const historicalRate = await client.getHistoricalRate('2024-01-01', 1, 'USD', 'EUR');
     console.log(`USD to EUR rate on 2024-01-01: ${historicalRate}`);
     console.log('✓ Test 4 passed\n');
 
     // Test 5: Get all historical rates for a date
     console.log('Test 5: Getting all historical rates for USD on a date...');
-    const historicalRates = await client.getHistoricalRates('USD', '2024-01-01');
+    const historicalRates = await client.getHistoricalRates('2024-01-01', 1, 'USD');
     console.log(`✓ Found ${Object.keys(historicalRates).length} currency rates for USD on 2024-01-01`);
-    console.log(`Sample rates: EUR=${historicalRates.EUR}, GBP=${historicalRates.GBP}, JPY=${historicalRates.JPY}`);
+    const rates = historicalRates as Record<string, number>;
+    console.log(`Sample rates: EUR=${rates.EUR}, GBP=${rates.GBP}, JPY=${rates.JPY}`);
     console.log('✓ Test 5 passed\n');
 
     // Summary
@@ -51,7 +53,7 @@ async function runTests() {
     console.log(`✅ Historical rate (USD/EUR, 2024-01-01): ${historicalRate}`);
     console.log(`✅ Current conversion (100 USD): ${amount} EUR`);
     console.log(`✅ Supported currencies: ${currencies.length}`);
-    console.log(`✅ Historical rates available: ${Object.keys(historicalRates).length} currencies`);
+    console.log(`✅ Historical rates available: ${Object.keys(rates).length} currencies`);
     
     console.log('\nTesting additional functionality...\n');
 
@@ -64,7 +66,7 @@ async function runTests() {
     // Test 7: Time series data
     console.log('Test 7: Time series data...');
 
-    const timeSeries = await client.getTimeSeries('USD', 'EUR', '2024-01-01', '2024-01-03');
+    const timeSeries = await client.getTimeSeries('2024-01-01', '2024-01-03', 1, 'USD', ['EUR']);
     console.log(`Time series data for USD/EUR (2024-01-01 to 2024-01-03):`, Object.keys(timeSeries).length, 'days');
     console.log('Sample:', Object.entries(timeSeries).slice(0, 2));
     console.log('✓ Test 7 passed\n');

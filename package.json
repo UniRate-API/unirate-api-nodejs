@@ -1,7 +1,7 @@
 {
   "name": "unirate-api",
-  "version": "0.2.0",
-  "description": "Official Node.js client for the Unirate API - real-time and historical currency exchange rates",
+  "version": "1.0.0",
+  "description": "Official Node.js client for the Unirate API - real-time and historical currency exchange rates, plus VAT rates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -17,7 +17,9 @@
     "exchange",
     "rates",
     "historical",
-    "timeseries"
+    "timeseries",
+    "vat",
+    "taxes"
   ],
   "author": "Unirate Team",
   "license": "MIT",
